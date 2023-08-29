@@ -12,7 +12,7 @@ import java.util.Map;
 public interface PostService {
     List<Post> getAllPosts();
     Post getPostById(String postId);
-    Post savePost(Map<String, String> map);
+    Post doAddPost(Map<String, String> map);
     Post updatePost(Map<String, String> map);
     String uploadPostImg (MultipartFile file) throws IOException;
 

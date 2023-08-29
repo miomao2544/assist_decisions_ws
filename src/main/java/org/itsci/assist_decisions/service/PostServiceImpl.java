@@ -45,7 +45,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post savePost(Map<String, String> map) {
+    public Post doAddPost(Map<String, String> map) {
 
         String rawPostId = postRepository.getLatestPostId();
 

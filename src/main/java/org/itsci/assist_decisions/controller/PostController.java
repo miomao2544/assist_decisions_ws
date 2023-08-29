@@ -26,10 +26,10 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addPost(@RequestBody Map<String,String> map){
+    public ResponseEntity doAddPost(@RequestBody Map<String,String> map){
         try{
             //Attributes of post from json
-            Post post = postService.savePost(map);
+            Post post = postService.doAddPost(map);
             return new ResponseEntity<>(post, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
