@@ -13,9 +13,9 @@ public interface PostService {
     List<Post> getAllPosts();
     Post getPostById(String postId);
     Post doAddPost(Map<String, String> map);
-    Post updatePost(Map<String, String> map);
+    Post doEditPost(Map<String, String> map);
     String uploadPostImg (MultipartFile file) throws IOException;
 
     Path downloadPostImg (String filePath) ;
-    void deletePost(String postId);
+    void doDeletePost(String postId);
 }

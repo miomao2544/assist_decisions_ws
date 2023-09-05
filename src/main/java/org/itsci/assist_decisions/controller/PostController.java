@@ -40,10 +40,10 @@ public class PostController {
 
 
     @PostMapping("/update")
-    public ResponseEntity updatePost(@RequestBody Map<String,String> map){
+    public ResponseEntity doEditPost(@RequestBody Map<String,String> map){
         try{
             //Attributes of post from json
-            Post post = postService.updatePost(map);
+            Post post = postService.doEditPost(map);
             return new ResponseEntity<>(post, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -62,9 +62,9 @@ public class PostController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deletePostByPostId (@PathVariable("id") String postId) {
+    public ResponseEntity doDeletePost(@PathVariable("id") String postId) {
         try {
-            postService.deletePost(postId);
+            postService.doDeletePost(postId);
             return new ResponseEntity<>("Post ID " + postId + " was deleted!", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

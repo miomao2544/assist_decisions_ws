@@ -11,11 +11,11 @@ import java.util.Map;
 
 public interface MemberService {
     List<Member> getAllMembers();
-    Member getMemberById(String username);
-    Member saveMember(Map<String, String> map);
+    Member getProfile(String username);
+    Member doRegister(Map<String, String> map);
 
     String uploadMemberImg (MultipartFile file) throws IOException;
     Path downloadMemberImg (String filePath) ;
-    Member updateMember(Map<String, String> map);
+    Member doEditProfile(Map<String, String> map);
     void deleteMember(String memberId);
 }

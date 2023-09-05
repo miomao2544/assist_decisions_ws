@@ -33,9 +33,9 @@ public class MemberController {
 
 
     @PostMapping("/add")
-    public ResponseEntity addMember(@RequestBody Map<String,String> map){
+    public ResponseEntity doRegister(@RequestBody Map<String,String> map){
         try{
-           Member member = memberService.saveMember(map);
+           Member member = memberService.doRegister(map);
             return new ResponseEntity<>(member, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -44,19 +44,19 @@ public class MemberController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity updateMember(@RequestBody Map<String,String> map){
+    public ResponseEntity doEditProfile(@RequestBody Map<String,String> map){
         try{
-            Member member = memberService.updateMember(map);
+            Member member = memberService.doEditProfile(map);
             return new ResponseEntity<>(member, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/getMemberById/{username}")
+    @PostMapping("/getProfile/{username}")
     public ResponseEntity getMemberById(@PathVariable("username") String username) throws IllegalStateException{
         try{
-            Member member = memberService.getMemberById(username);
+            Member member = memberService.getProfile(username);
             return new ResponseEntity<>(member, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

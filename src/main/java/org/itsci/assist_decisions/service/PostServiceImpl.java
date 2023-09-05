@@ -91,7 +91,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post updatePost(Map<String, String> map) {
+    public Post doEditPost(Map<String, String> map) {
         String postId = map.get("postId");
         String postImage = map.get("postImage");
         String title = map.get("title");
@@ -126,7 +126,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void deletePost(String postId) {
+    public void doDeletePost(String postId) {
         Post post = postRepository.getReferenceById(postId);
         postRepository.delete(post);
     }

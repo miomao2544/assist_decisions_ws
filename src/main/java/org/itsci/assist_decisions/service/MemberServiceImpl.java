@@ -32,12 +32,12 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member getMemberById(String username) {
+    public Member getProfile(String username) {
         return memberRepository.getReferenceById(username);
     }
 
     @Override
-    public Member saveMember(Map<String, String> map) {
+    public Member doRegister(Map<String, String> map) {
         String username = map.get("username");
         boolean adminstatus = Boolean.parseBoolean(map.get("adminstatus"));
         String email = map.get("email");
@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member updateMember(Map<String, String> map) {
+    public Member doEditProfile(Map<String, String> map) {
         String username = map.get("username");
         boolean adminstatus = Boolean.parseBoolean(map.get("adminstatus"));
         String email = map.get("email");
