@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -52,10 +51,23 @@ public class MemberServiceImpl implements MemberService{
         String status = map.get("status");
         String tel = map.get("tel");
         String interestId = map.get("interestId");
+
         System.out.println(username);
-        Member member = new Member(username,hashedPassword,nickname,gender,firstname,lastname,email,tel,image,status,point,adminstatus);
-        Interest interest = interestRepository.getReferenceById(interestId);
-        member.getInterests().add(interest);
+
+        Member member = new Member(username, hashedPassword, nickname, gender, firstname, lastname, email, tel, image, status, point, adminstatus);
+
+        String[] interestIdsArray = interestId.split(",");
+        Set<Interest> interests = new HashSet<>();
+        for (String id : interestIdsArray) {
+            Interest interest = interestRepository.findById(id.trim()).orElse(null);
+            if (interest == null) {
+                interest = new Interest(id.trim());
+                interestRepository.save(interest);
+            }
+            interests.add(interest);
+        }
+
+        member.setInterests(interests);
         return memberRepository.save(member);
     }
 
