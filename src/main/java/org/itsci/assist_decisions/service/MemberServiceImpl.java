@@ -47,8 +47,8 @@ public class MemberServiceImpl implements MemberService{
         String nickname = map.get("nickname");
         String password = map.get("password");
         String hashedPassword = hashToMD5(password);
-        Integer point = Integer.parseInt(map.get("point"));
-        String status = map.get("status");
+        Integer point = 1000;
+        String status = "active";
         String tel = map.get("tel");
         String interestId = map.get("interestId");
 
