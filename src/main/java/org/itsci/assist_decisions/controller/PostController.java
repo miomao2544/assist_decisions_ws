@@ -61,6 +61,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/listpreview")
+    public ResponseEntity doPreviewPost(){
+        try{
+            List<Post> posts =  postService.getAllPostsDateStopAfter();
+            return new ResponseEntity(posts, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity doDeletePost(@PathVariable("id") String postId) {
         try {

@@ -38,6 +38,10 @@ public class PostServiceImpl implements PostService{
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
+    public  List<Post> getAllPostsDateStopAfter(){
+        Date currentDate = new Date();
+        return postRepository.findAllByDateStopAfter(currentDate);
+    }
 
     @Override
     public Post getPostById(String postId) {
