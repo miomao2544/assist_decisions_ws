@@ -51,7 +51,6 @@ public class MemberServiceImpl implements MemberService{
         String status = "active";
         String tel = map.get("tel");
         String interestId = map.get("interestId");
-
         System.out.println(username);
 
         Member member = new Member(username, hashedPassword, nickname, gender, firstname, lastname, email, tel, image, status, point, adminstatus);
@@ -68,7 +67,13 @@ public class MemberServiceImpl implements MemberService{
         }
 
         member.setInterests(interests);
-        return memberRepository.save(member);
+        if ("0".equals(memberRepository.getUsernameUnique(username))) {
+            System.out.println("username count is: " + memberRepository.getUsernameUnique(username));
+            return memberRepository.save(member);
+        }else {
+            System.out.println("username count is not O : " + memberRepository.getUsernameUnique(username));
+            return null;
+        }
     }
 
     @Override
