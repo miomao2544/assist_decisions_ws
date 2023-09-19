@@ -13,7 +13,10 @@ public interface PostService {
     List<Post> getAllPosts();
 
     List<Post> getAllPostsDateStopAfter();
+    List<Post> getAllPostsForMember(String username);
     Post getPostById(String postId);
+
+
     Post doAddPost(Map<String, String> map);
     Post doEditPost(Map<String, String> map);
     String uploadPostImg (MultipartFile file) throws IOException;

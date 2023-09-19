@@ -9,4 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface MemberRepository extends JpaRepository<Member,String> {
     @Query(value = "SELECT count(*) FROM assist_decisions_db.member WHERE username = :username", nativeQuery = true)
     String getUsernameUnique(@Param("username") String username);
+
 }

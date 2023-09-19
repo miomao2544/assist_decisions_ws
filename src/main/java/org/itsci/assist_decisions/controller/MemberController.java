@@ -53,6 +53,7 @@ public class MemberController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping("/getProfile/{username}")
     public ResponseEntity getMemberById(@PathVariable("username") String username) throws IllegalStateException{
         try{

@@ -71,6 +71,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/list/{username}")
+    public ResponseEntity doPostInterest(@PathVariable("username") String username) {
+        try {
+            List<Post> posts = postService.getAllPostsForMember(username);
+            return new ResponseEntity(posts, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity doDeletePost(@PathVariable("id") String postId) {
@@ -83,6 +94,8 @@ public class PostController {
         }
     }
 
+
+
     @RequestMapping("/uploadimg")
     public ResponseEntity uploadPostImage (@RequestParam("image") MultipartFile file) throws IllegalStateException, IOException {
         try {
@@ -93,6 +106,7 @@ public class PostController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/downloadimg/{fileName}")
     public byte[] downloadPostImg (@PathVariable("fileName") String fileName) throws IOException {
