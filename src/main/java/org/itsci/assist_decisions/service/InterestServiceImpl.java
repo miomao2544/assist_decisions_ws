@@ -19,9 +19,14 @@ public class InterestServiceImpl implements InterestService{
     }
 
     @Override
+    public List<Interest> InterestsfindByUsername(String username) {
+        return interestRepository.InterestsfindByUsername(username);
+    }
+    @Override
     public Interest getInterestById(String interestId) {
         return interestRepository.getReferenceById(interestId);
     }
+
 
     @Override
     public Interest saveInterest(Map<String, String> map) {

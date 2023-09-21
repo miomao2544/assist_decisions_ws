@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface InterestService {
     List<Interest> getAllInterests();
+    List<Interest> InterestsfindByUsername(String username);
     Interest getInterestById(String interestId);
     Interest saveInterest(Map<String, String> map);
     void updateInterest(Interest interest);
