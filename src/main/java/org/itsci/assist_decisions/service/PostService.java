@@ -16,6 +16,11 @@ public interface PostService {
     List<Post> getAllPostsForMember(String username);
     Post getPostById(String postId);
 
+    List<Post> getListPostsInterest(String username);
+
+    List<Post> getListPostByMember(String username);
+
+    Integer getListCountMember(String posId);
 
     Post doAddPost(Map<String, String> map);
     Post doEditPost(Map<String, String> map);

@@ -4,11 +4,11 @@ import org.itsci.assist_decisions.model.Interest;
 import org.itsci.assist_decisions.model.Member;
 import org.itsci.assist_decisions.repository.InterestRepository;
 import org.itsci.assist_decisions.repository.MemberRepository;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -50,14 +50,15 @@ public class MemberServiceImpl implements MemberService{
         Integer point = 1000;
         String status = "active";
         String tel = map.get("tel");
-        String interestId = map.get("interestId");
-        System.out.println(username);
+
+
 
         Member member = new Member(username, hashedPassword, nickname, gender, firstname, lastname, email, tel, image, status, point, adminstatus);
+        String interestsJson = map.get("interests");
+        List<String> interestIdList = Arrays.asList(interestsJson.split(","));
 
-        String[] interestIdsArray = interestId.split(",");
         Set<Interest> interests = new HashSet<>();
-        for (String id : interestIdsArray) {
+        for (String id : interestIdList) {
             Interest interest = interestRepository.findById(id.trim()).orElse(null);
             if (interest == null) {
                 interest = new Interest(id.trim());
@@ -66,15 +67,18 @@ public class MemberServiceImpl implements MemberService{
             interests.add(interest);
         }
 
+
         member.setInterests(interests);
+
         if ("0".equals(memberRepository.getUsernameUnique(username))) {
             System.out.println("username count is: " + memberRepository.getUsernameUnique(username));
             return memberRepository.save(member);
-        }else {
-            System.out.println("username count is not O : " + memberRepository.getUsernameUnique(username));
+        } else {
+            System.out.println("username count is not 0: " + memberRepository.getUsernameUnique(username));
             return null;
         }
     }
+
 
     @Override
     public Member doEditProfile(Map<String, String> map) {

@@ -61,6 +61,39 @@ public class PostController {
         }
     }
 
+    @PostMapping("/notify/{username}")
+    public ResponseEntity getListPostsInterest(@PathVariable("username") String username) {
+        try {
+            List<Post> posts = postService.getListPostsInterest(username);
+            return new ResponseEntity(posts, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/listpost/{username}")
+    public ResponseEntity getListPostByMember(@PathVariable("username") String username) {
+        try {
+            List<Post> posts = postService.getListPostByMember(username);
+            return new ResponseEntity(posts, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/count/{postId}")
+    public ResponseEntity getListCountMember(@PathVariable("postId") String postId) {
+        try {
+            Integer count = postService.getListCountMember(postId);
+            System.out.println("-----------------"+ count + "---------------");
+            return new ResponseEntity(count, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping("/listpreview")
     public ResponseEntity doPreviewPost(){
         try{
