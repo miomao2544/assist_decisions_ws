@@ -123,14 +123,6 @@ public class MemberServiceImpl implements MemberService{
     }
 
 
-    public String generateMemberId (long rawId) {
-        String result = Long.toString(rawId);
-        while (result.length() < 6) {
-            result = "0" + result;
-        }
-        result = "Member" + result;
-        return result;
-    }
 
     public static String hashToMD5(String input) {
         try {

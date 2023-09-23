@@ -7,14 +7,18 @@ import org.itsci.assist_decisions.repository.ChoiceRepository;
 import org.itsci.assist_decisions.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class ChoiceServiceImpl implements ChoiceService{
-
+    final String mainPath = "C:\\Users\\lovely\\Desktop\\assist_decisions\\imgs\\choice\\";
     @Autowired
     private ChoiceRepository choiceRepository;
 
@@ -34,7 +38,14 @@ public class ChoiceServiceImpl implements ChoiceService{
 
     @Override
     public Choice saveChoice(Map<String, String> map) {
-        String choiceID = generateChoiceId(choiceRepository.count() +1);
+        String rawChoiceId = postRepository.getLatestPostId();
+
+        if (rawChoiceId == null) {
+            rawChoiceId = "C000000";
+        }
+        String rawChoiceIdWithoutP = rawChoiceId.substring(1);
+        long rawLongChoiceId = Long.parseLong(rawChoiceIdWithoutP);
+        String choiceID = generateChoiceId(rawLongChoiceId +1);
         String choiceName = map.get("choiceName");
         String choiceImage = map.get("choiceImage");
         String postID = map.get("postID");
@@ -59,7 +70,17 @@ public class ChoiceServiceImpl implements ChoiceService{
 
     @Override
     public void deleteChoice(String choiceId) {
-
     }
 
+    @Override
+    public String uploadChoiceImg(MultipartFile file) throws IOException {
+        String newFileName = System.currentTimeMillis() + ".png";
+        file.transferTo(new File(mainPath + newFileName));
+        return newFileName;
+    }
+
+    @Override
+    public Path downloadChoiceImg(String filePath) {
+        return new File(mainPath + filePath).toPath();
+    }
 }

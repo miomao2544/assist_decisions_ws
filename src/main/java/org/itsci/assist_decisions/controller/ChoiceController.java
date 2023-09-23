@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +42,21 @@ public class ChoiceController {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @RequestMapping("/uploadimg")
+    public ResponseEntity uploadChoiceImage (@RequestParam("image") MultipartFile file) throws IllegalStateException, IOException {
+        try {
+            String filePath = choiceService.uploadChoiceImg(file);
+            return new ResponseEntity<>(filePath, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/downloadimg/{fileName}")
+    public byte[] downloadChoiceImg (@PathVariable("fileName") String fileName) throws IOException {
+        byte[] image = Files.readAllBytes(choiceService.downloadChoiceImg(fileName));
+        return image;
     }
 }

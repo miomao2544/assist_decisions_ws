@@ -74,11 +74,8 @@ public class PostServiceImpl implements PostService{
             rawPostId = "P000000";
         }
         String rawPostIdWithoutP = rawPostId.substring(1);
-
         long rawLongPostId = Long.parseLong(rawPostIdWithoutP);
-
         String postId = generatePostId(rawLongPostId +1);
-
         String postImage = map.get("postImage");
         String title = map.get("title");
         String description = map.get("description");

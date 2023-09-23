@@ -75,7 +75,7 @@ public class MemberController {
     }
 
     @RequestMapping("/uploadimg")
-    public ResponseEntity uploadPostImage (@RequestParam("image") MultipartFile file) throws IllegalStateException, IOException {
+    public ResponseEntity uploadMemberImage (@RequestParam("image") MultipartFile file) throws IllegalStateException, IOException {
         try {
             String filePath = memberService.uploadMemberImg(file);
             return new ResponseEntity<>(filePath, HttpStatus.OK);
@@ -86,7 +86,7 @@ public class MemberController {
     }
 
     @GetMapping("/downloadimg/{fileName}")
-    public byte[] downloadPostImg (@PathVariable("fileName") String fileName) throws IOException {
+    public byte[] downloadMemberImg (@PathVariable("fileName") String fileName) throws IOException {
         byte[] image = Files.readAllBytes(memberService.downloadMemberImg(fileName));
         return image;
     }
