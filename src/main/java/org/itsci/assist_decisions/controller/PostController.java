@@ -104,6 +104,7 @@ public class PostController {
         }
     }
 
+
     @PostMapping("/list/{username}")
     public ResponseEntity doPostInterest(@PathVariable("username") String username) {
         try {
