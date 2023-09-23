@@ -36,6 +36,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public boolean checkUsernameExists(String username) {
+        String result = memberRepository.getUsernameUnique(username);
+        return Integer.parseInt(result) > 0;
+    }
+    @Override
     public Member doRegister(Map<String, String> map) {
         String username = map.get("username");
         boolean adminstatus = Boolean.parseBoolean(map.get("adminstatus"));
@@ -51,8 +56,6 @@ public class MemberServiceImpl implements MemberService{
         String status = "active";
         String tel = map.get("tel");
 
-
-
         Member member = new Member(username, hashedPassword, nickname, gender, firstname, lastname, email, tel, image, status, point, adminstatus);
         String interestsJson = map.get("interests");
         List<String> interestIdList = Arrays.asList(interestsJson.split(","));
@@ -66,17 +69,8 @@ public class MemberServiceImpl implements MemberService{
             }
             interests.add(interest);
         }
-
-
         member.setInterests(interests);
-
-        if ("0".equals(memberRepository.getUsernameUnique(username))) {
-            System.out.println("username count is: " + memberRepository.getUsernameUnique(username));
-            return memberRepository.save(member);
-        } else {
-            System.out.println("username count is not 0: " + memberRepository.getUsernameUnique(username));
-            return null;
-        }
+        return memberRepository.save(member);
     }
 
 
@@ -95,11 +89,19 @@ public class MemberServiceImpl implements MemberService{
         Integer point = Integer.parseInt(map.get("point"));
         String status = map.get("status");
         String tel = map.get("tel");
-        String interestId = map.get("interestId");
-        System.out.println(username);
-        Member member = new Member(username,hashedPassword,nickname,gender,firstname,lastname,email,tel,image,status,point,adminstatus);
-        Interest interest = interestRepository.getReferenceById(interestId);
-        member.getInterests().add(interest);
+        Member member = new Member(username, hashedPassword, nickname, gender, firstname, lastname, email, tel, image, status, point, adminstatus);
+        String interestsJson = map.get("interests");
+        List<String> interestIdList = Arrays.asList(interestsJson.split(","));
+        Set<Interest> interests = new HashSet<>();
+        for (String id : interestIdList) {
+            Interest interest = interestRepository.findById(id.trim()).orElse(null);
+            if (interest == null) {
+                interest = new Interest(id.trim());
+                interestRepository.save(interest);
+            }
+            interests.add(interest);
+        }
+        member.setInterests(interests);
         return memberRepository.save(member);
     }
 

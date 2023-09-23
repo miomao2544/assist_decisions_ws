@@ -13,7 +13,7 @@ public interface MemberService {
     List<Member> getAllMembers();
     Member getProfile(String username);
     Member doRegister(Map<String, String> map);
-
+    boolean checkUsernameExists(String username);
     String uploadMemberImg (MultipartFile file) throws IOException;
     Path downloadMemberImg (String filePath) ;
     Member doEditProfile(Map<String, String> map);

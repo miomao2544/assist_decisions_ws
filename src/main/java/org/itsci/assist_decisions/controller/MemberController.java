@@ -31,7 +31,16 @@ public class MemberController {
         return "hi";
     }
 
-
+    @PostMapping("/uq/{username}")
+    public ResponseEntity getUsernameUnique(@PathVariable("username") String username) throws IllegalStateException{
+        try{
+            boolean user = memberService.checkUsernameExists(username);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping("/add")
     public ResponseEntity doRegister(@RequestBody Map<String,String> map){
         try{
