@@ -24,7 +24,6 @@ public class ChoiceController {
     @PostMapping("/add")
     public ResponseEntity addChoice(@RequestBody Map<String,String> map){
         try{
-            //Attributes of post from json
             Choice choice = choiceService.saveChoice(map);
             return new ResponseEntity<>(choice, HttpStatus.OK);
         }catch (Exception e){

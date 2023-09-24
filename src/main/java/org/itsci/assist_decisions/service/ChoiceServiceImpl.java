@@ -38,7 +38,7 @@ public class ChoiceServiceImpl implements ChoiceService{
 
     @Override
     public Choice saveChoice(Map<String, String> map) {
-        String rawChoiceId = postRepository.getLatestPostId();
+        String rawChoiceId = choiceRepository.getLatestChoiceId();
 
         if (rawChoiceId == null) {
             rawChoiceId = "C000000";
@@ -48,8 +48,8 @@ public class ChoiceServiceImpl implements ChoiceService{
         String choiceID = generateChoiceId(rawLongChoiceId +1);
         String choiceName = map.get("choiceName");
         String choiceImage = map.get("choiceImage");
-        String postID = map.get("postID");
-        Post post = postRepository.getReferenceById(postID);
+        String postId = map.get("postId");
+        Post post = postRepository.getReferenceById(postId);
         Choice choice = new Choice(choiceID,choiceName,choiceImage,post);
         return choiceRepository.save(choice);
     }

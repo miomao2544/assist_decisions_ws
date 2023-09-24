@@ -1,5 +1,6 @@
 package org.itsci.assist_decisions.service;
 
+import lombok.Data;
 import org.itsci.assist_decisions.model.Member;
 import org.itsci.assist_decisions.model.Post;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ public interface PostService {
 
     List<Post> getListPostByMember(String username);
 
+    List<Post> getSearchListPostByAll(String title, String interests, String point, String daterequest);
     Integer getListCountMember(String posId);
 
     Post doAddPost(Map<String, String> map);

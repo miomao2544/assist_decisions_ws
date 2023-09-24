@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface InterestRepository extends JpaRepository<Interest,String> {
-    @Query(value = "SELECT * FROM assist_decisions_db.interest where interestId in(SELECT interestId FROM assist_decisions_db.memberinterest where username = :username)", nativeQuery = true)
+    @Query(value = "SELECT * FROM interest where interestId in(SELECT interestId FROM memberinterest where username = :username)", nativeQuery = true)
     public List<Interest> InterestsfindByUsername(@Param("username") String username);
 }

@@ -3,6 +3,7 @@ package org.itsci.assist_decisions.controller;
 import org.itsci.assist_decisions.model.Post;
 import org.itsci.assist_decisions.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -109,6 +112,38 @@ public class PostController {
     public ResponseEntity doPostInterest(@PathVariable("username") String username) {
         try {
             List<Post> posts = postService.getAllPostsForMember(username);
+            return new ResponseEntity(posts, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity doSearchPost(@RequestParam(value = "title", required = false) String title,
+                                       @RequestParam(value = "interests", required = false) String interests,
+                                       @RequestParam(value = "point", required = false) String point,
+                                       @RequestParam(value = "daterequest", required = false) String daterequest) {
+        if (title == null) {
+            title = "";
+        }
+        if (interests == null) {
+            interests = "";
+        }
+        if (point == null || point.isEmpty()) {
+            point = "0";
+        }
+        String daterequestValue;
+
+        if (daterequest != null && !daterequest.isEmpty()) {
+            daterequestValue = daterequest;
+        } else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            daterequestValue = dateFormat.format(new Date());
+        }
+
+        try {
+            List<Post> posts = postService.getSearchListPostByAll(title, interests, point, daterequestValue);
             return new ResponseEntity(posts, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

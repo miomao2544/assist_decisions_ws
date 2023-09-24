@@ -1,6 +1,7 @@
 package org.itsci.assist_decisions.service;
 
 import ch.qos.logback.classic.pattern.DateConverter;
+import lombok.Data;
 import org.itsci.assist_decisions.model.Interest;
 import org.itsci.assist_decisions.model.Member;
 import org.itsci.assist_decisions.model.Post;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +57,23 @@ public class PostServiceImpl implements PostService{
     public  List<Post> getListPostByMember(String username){
         return postRepository.getListPostByMember(username);
     }
+
+    @Override
+    public List<Post> getSearchListPostByAll(String title, String interests, String point, String daterequest) {
+        List<String> interestIdList = Arrays.asList(interests.split(","));
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateStop;
+        try {
+            dateStop = dateTimeFormat.parse(daterequest);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        Integer pointValue = Integer.parseInt(point);
+        return postRepository.getSearchListPostByAll(title, interestIdList, pointValue, dateStop);
+    }
+
+
     @Override
     public  Integer getListCountMember(String postId){
         return postRepository.getListCountMember(postId);

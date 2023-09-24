@@ -28,4 +28,7 @@ public interface PostRepository extends JpaRepository<Post,String> {
 
     @Query(value = "SELECT count(c.postId) FROM choice c right join vote v on c.choiceId = v.choiceId where postId = :postId", nativeQuery = true)
     Integer getListCountMember(@Param("postId") String postId);
+
+    @Query(value = "SELECT p.*,i.interestName FROM post p JOIN interest i ON p.interestId = i.interestId WHERE p.interestId IN :interests AND p.postPoint >= :point AND p.dateStop >= :daterequest AND p.title LIKE %:title%", nativeQuery = true)
+    public List<Post> getSearchListPostByAll(@Param("title") String title, @Param("interests") List<String> interests, @Param("point") Integer point, @Param("daterequest") Date daterequest);
 }
