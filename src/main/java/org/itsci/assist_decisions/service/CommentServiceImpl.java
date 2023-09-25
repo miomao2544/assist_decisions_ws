@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public List<Comment> getCommentById(String postId) {
-        return null;
+        return commentRepository.findCommentByPost_PostIdOrderByCommentIdDesc(postId);
     }
 
     @Override

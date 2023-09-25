@@ -33,4 +33,15 @@ public class CommentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/getCommentById/{postId}")
+    public ResponseEntity getCommentById(@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            List<Comment> comments = commentService.getCommentById(postId);
+            return new ResponseEntity<>(comments, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
