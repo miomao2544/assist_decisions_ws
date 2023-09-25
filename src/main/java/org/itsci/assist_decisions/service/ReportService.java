@@ -2,14 +2,16 @@ package org.itsci.assist_decisions.service;
 
 
 
+import org.itsci.assist_decisions.model.Comment;
 import org.itsci.assist_decisions.model.Report;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReportService {
     List<Report> getAllReports();
     Report getReportById(String reportId);
-    void saveReport(Report report);
+    Report doRerortPost(Map<String, String> map);
     void updateReport(Report report);
     void deleteReport(String reportId);
 }
