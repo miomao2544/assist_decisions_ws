@@ -54,6 +54,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/view/{postId}")
+    public ResponseEntity getPostById(@PathVariable("postId") String postId) {
+        try {
+            Post post = postService.getPostById(postId);
+            return new ResponseEntity(post, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/list")
     public ResponseEntity listPost(){
         try{

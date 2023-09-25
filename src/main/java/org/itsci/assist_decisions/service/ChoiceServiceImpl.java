@@ -45,12 +45,12 @@ public class ChoiceServiceImpl implements ChoiceService{
         }
         String rawChoiceIdWithoutP = rawChoiceId.substring(1);
         long rawLongChoiceId = Long.parseLong(rawChoiceIdWithoutP);
-        String choiceID = generateChoiceId(rawLongChoiceId +1);
+        String choiceId = generateChoiceId(rawLongChoiceId +1);
         String choiceName = map.get("choiceName");
         String choiceImage = map.get("choiceImage");
         String postId = map.get("postId");
         Post post = postRepository.getReferenceById(postId);
-        Choice choice = new Choice(choiceID,choiceName,choiceImage,post);
+        Choice choice = new Choice(choiceId,choiceName,choiceImage,post);
         return choiceRepository.save(choice);
     }
 
