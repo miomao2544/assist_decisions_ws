@@ -31,6 +31,16 @@ public class ChoiceController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/update")
+    public ResponseEntity editChoice(@RequestBody Map<String,String> map){
+        try{
+            Choice choice = choiceService.editChoice(map);
+            return new ResponseEntity<>(choice, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping("/getChoiceById/{postId}")
     public ResponseEntity getChoiceById(@PathVariable("postId") String postId) throws IllegalStateException{

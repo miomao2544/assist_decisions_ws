@@ -22,12 +22,12 @@ public class Vote {
     @Column(name="voteDate",nullable = false)
     private Date voteDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username",nullable = false,unique=true)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username",nullable = false)
     private Member member;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name= "choiceID",nullable = false)
+    @JoinColumn(name= "choiceId",nullable = false)
     private Choice choice;
 
 }

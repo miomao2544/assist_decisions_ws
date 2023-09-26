@@ -45,7 +45,6 @@ public class PostController {
     @PostMapping("/update")
     public ResponseEntity doEditPost(@RequestBody Map<String,String> map){
         try{
-            //Attributes of post from json
             Post post = postService.doEditPost(map);
             return new ResponseEntity<>(post, HttpStatus.OK);
         }catch (Exception e){
@@ -163,8 +162,8 @@ public class PostController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity doDeletePost(@PathVariable("id") String postId) {
+    @PostMapping("/delete/{postId}")
+    public ResponseEntity doDeletePost(@PathVariable("postId") String postId) {
         try {
             postService.doDeletePost(postId);
             return new ResponseEntity<>("Post ID " + postId + " was deleted!", HttpStatus.OK);

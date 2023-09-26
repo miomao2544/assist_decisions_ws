@@ -165,6 +165,8 @@ public class PostServiceImpl implements PostService{
     @Override
     public void doDeletePost(String postId) {
         Post post = postRepository.getReferenceById(postId);
+        post.setMember(null);
+        post.setInterest(null);
         postRepository.delete(post);
     }
 

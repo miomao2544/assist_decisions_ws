@@ -54,6 +54,25 @@ public class ChoiceServiceImpl implements ChoiceService{
         return choiceRepository.save(choice);
     }
 
+    public Choice editChoice(Map<String, String> map) {
+        String choiceId = map.get("choiceId");
+        if(choiceId == ""){
+            String rawChoiceId = choiceRepository.getLatestChoiceId();
+
+            if (rawChoiceId == null) {
+                rawChoiceId = "C000000";
+            }
+            String rawChoiceIdWithoutP = rawChoiceId.substring(1);
+            long rawLongChoiceId = Long.parseLong(rawChoiceIdWithoutP);
+            choiceId = generateChoiceId(rawLongChoiceId +1);
+        }
+        String choiceName = map.get("choiceName");
+        String choiceImage = map.get("choiceImage");
+        String postId = map.get("postId");
+        Post post = postRepository.getReferenceById(postId);
+        Choice choice = new Choice(choiceId,choiceName,choiceImage,post);
+        return choiceRepository.save(choice);
+    }
     public String generateChoiceId(long rawId) {
         String result = Long.toString(rawId);
         while (result.length() < 11) {
@@ -61,11 +80,6 @@ public class ChoiceServiceImpl implements ChoiceService{
         }
         result = "C" + result;
         return result;
-    }
-
-    @Override
-    public Choice updateChoice(Map<String, String> map) {
-        return null;
     }
 
     @Override

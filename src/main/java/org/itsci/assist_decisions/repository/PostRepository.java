@@ -4,6 +4,7 @@ import org.itsci.assist_decisions.model.Choice;
 import org.itsci.assist_decisions.model.Interest;
 import org.itsci.assist_decisions.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
