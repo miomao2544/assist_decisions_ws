@@ -28,12 +28,13 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public List<Report> getAllReports() {
-        return null;
+        return reportRepository.findAll();
     }
 
     @Override
     public Report getReportById(String reportId) {
-        return null;
+
+        return reportRepository.getReferenceById(reportId);
     }
 
     @Override
