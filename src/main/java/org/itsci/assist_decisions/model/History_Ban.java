@@ -22,7 +22,7 @@ public class History_Ban {
     private String historyId;
 
     @Column(name="banComment",length = 1000,columnDefinition="LONGTEXT")
-    private TextArea banComment;
+    private String banComment;
 
     @Column(name="banDate",nullable = false)
     private Date banDate;
