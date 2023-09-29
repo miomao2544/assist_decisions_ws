@@ -109,7 +109,7 @@ public class PostServiceImpl implements PostService{
             e.printStackTrace();
             return null;
         }
-        String result = map.get("result");
+        String result = "r";
         Integer qtyMax;
         Integer qtyMin;
         try {

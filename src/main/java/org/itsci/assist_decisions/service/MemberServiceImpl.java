@@ -40,6 +40,26 @@ public class MemberServiceImpl implements MemberService{
         String result = memberRepository.getUsernameUnique(username);
         return Integer.parseInt(result) > 0;
     }
+
+    @Override
+    public String doLoginMember(String username,String Password) {
+        String result = "";
+        Member member;
+         member  = memberRepository.getMemberByUsername(username);
+        if(member == null){
+            result = "nodata";
+        }
+        else if (!member.getPassword().equals(hashToMD5(Password))) {
+            result = "false";
+        }else if (!member.getStatus().equals("active")) {
+            result = "noactive";
+        }
+        else if (member.getPassword().equals(hashToMD5(Password))&&member.getStatus().equals("active")) {
+            result = "true";
+        }
+        System.out.println(result);
+        return result;
+    }
     @Override
     public Member doRegister(Map<String, String> map) {
         String username = map.get("username");
@@ -52,7 +72,7 @@ public class MemberServiceImpl implements MemberService{
         String nickname = map.get("nickname");
         String password = map.get("password");
         String hashedPassword = hashToMD5(password);
-        Integer point = 1000;
+        Integer point = 90;
         String status = "active";
         String tel = map.get("tel");
 

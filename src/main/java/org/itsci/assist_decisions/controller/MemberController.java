@@ -41,6 +41,17 @@ public class MemberController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/loginmember/{username}/{password}")
+    public ResponseEntity doLoginMember(@PathVariable("username") String username,@PathVariable("password") String password) throws IllegalStateException{
+        try{
+            String user = memberService.doLoginMember(username,password);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping("/add")
     public ResponseEntity doRegister(@RequestBody Map<String,String> map){
         try{

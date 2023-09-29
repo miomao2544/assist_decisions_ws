@@ -14,6 +14,7 @@ public interface MemberService {
     Member getProfile(String username);
     Member doRegister(Map<String, String> map);
     boolean checkUsernameExists(String username);
+    String doLoginMember(String username,String password);
     String uploadMemberImg (MultipartFile file) throws IOException;
     Path downloadMemberImg (String filePath) ;
     Member doEditProfile(Map<String, String> map);

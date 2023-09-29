@@ -18,7 +18,7 @@ public interface PostRepository extends JpaRepository<Post,String> {
 
     public List<Post> findAllByDateStopAfter(Date date);
 
-    @Query(value = "SELECT * FROM post where interestId in(SELECT interestId FROM memberinterest where username = :username);", nativeQuery = true)
+    @Query(value = "SELECT * FROM post where interestId in(SELECT interestId FROM memberinterest where username = :username)and username !=:username ", nativeQuery = true)
     public List<Post> findAllByPostsForMember(String username);
 
     @Query(value = "SELECT * FROM post where username != :username and interestId in(SELECT interestId FROM memberinterest where username = :username) order by postPoint Desc;", nativeQuery = true)
