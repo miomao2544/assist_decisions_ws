@@ -6,10 +6,7 @@ import org.itsci.assist_decisions.service.HistoryBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,6 +21,17 @@ public class HistoryBanController {
         try{
             History_Ban historyBan = historyBanService.doBanStatus(map);
             return new ResponseEntity<>(historyBan, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/status/{username}/{status}")
+    public ResponseEntity updateStatus(@PathVariable("username") String username,@PathVariable("status") String status){
+        try{
+             historyBanService.updateStatus(username,status);
+            return new ResponseEntity<>("Update "+ status, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

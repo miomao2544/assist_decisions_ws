@@ -15,5 +15,7 @@ public interface HistoryBanService {
     History_Ban getHistoryBanById(String HistoryBanId);
 
     void updateHistoryBan(History_Ban HistoryBan);
+
+    void updateStatus(String username,String status);
     void deleteHistoryBan(String HistoryBanId);
 }

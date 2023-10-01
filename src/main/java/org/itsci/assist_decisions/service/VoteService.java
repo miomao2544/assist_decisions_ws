@@ -14,6 +14,7 @@ public interface VoteService {
     Vote doVotePost(Map<String, String> map);
 
     int getVoteByChoice(String choiceId);
+    int getIFVoteChoice(String username,String choiceId);
     void updateVote(Vote vote);
     void deleteVote(String voteId);
 }

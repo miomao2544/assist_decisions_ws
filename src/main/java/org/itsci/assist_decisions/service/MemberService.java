@@ -15,6 +15,9 @@ public interface MemberService {
     Member doRegister(Map<String, String> map);
     boolean checkUsernameExists(String username);
     String doLoginMember(String username,String password);
+    void updatePoint(String username,int point);
+    void updatePointVote(String username,int point);
+    List<String> getUsernameVotePost(String postId);
     String uploadMemberImg (MultipartFile file) throws IOException;
     Path downloadMemberImg (String filePath) ;
     Member doEditProfile(Map<String, String> map);

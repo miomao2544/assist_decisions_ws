@@ -33,6 +33,9 @@ public class VoteServiceImpl implements VoteService{
         return voteRepository.findVoteForChoice(choiceId);
     }
 
+    public int getIFVoteChoice(String username,String postId) {
+        return voteRepository.findIFVoteChoice(username,postId);
+    }
     @Override
     public Vote doVotePost(Map<String, String> map) {
         String rawVoteId = voteRepository.getLatestVoteId();

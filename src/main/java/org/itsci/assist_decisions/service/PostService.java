@@ -29,5 +29,7 @@ public interface PostService {
     String uploadPostImg (MultipartFile file) throws IOException;
 
     Path downloadPostImg (String filePath) ;
+
+    void updateResult(String result,String postId);
     void doDeletePost(String postId);
 }

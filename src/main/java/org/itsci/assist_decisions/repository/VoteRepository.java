@@ -14,4 +14,9 @@ public interface VoteRepository extends JpaRepository<Vote,String> {
 
     @Query(value = "SELECT count(*) FROM vote where choiceId = :choiceId", nativeQuery = true)
     public int findVoteForChoice(String choiceId);
+
+
+
+    @Query(value = "select count(*) from vote where username = :username and :username  in (select username from vote where choiceId in(select choiceId from Choice where postId = :postId));", nativeQuery = true)
+    public int findIFVoteChoice(String username,String postId);
 }

@@ -47,6 +47,7 @@ public class HistoryBanServiceImpl implements HistoryBanService{
         String username = map.get("username");
         Member member = memberRepository.getReferenceById(username);
         History_Ban historyBan = new History_Ban(historyId,banComment,banDate,bantype,member);
+        updateStatus(username,"banned");
         return historyBanRepository.save(historyBan);
     }
 
@@ -62,6 +63,11 @@ public class HistoryBanServiceImpl implements HistoryBanService{
     @Override
     public void updateHistoryBan(History_Ban HistoryBan) {
 
+    }
+
+    @Override
+    public void updateStatus(String username,String status) {
+        historyBanRepository.updateStatus(username,status);
     }
 
     @Override

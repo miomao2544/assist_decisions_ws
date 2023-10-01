@@ -26,9 +26,19 @@ public class VoteController {
     }
 
         @PostMapping("/votechoice/{choiceId}")
-    public ResponseEntity getReportById(@PathVariable("choiceId") String choiceId) throws IllegalStateException{
+    public ResponseEntity getVoteById(@PathVariable("choiceId") String choiceId) throws IllegalStateException{
         try{
             int vote= voteService.getVoteByChoice(choiceId);
+            return new ResponseEntity<>(vote, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/ifvote/{username}/{postId}")
+    public ResponseEntity getIFVoteById(@PathVariable("username") String username,@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            int vote= voteService.getIFVoteChoice(username,postId);
             return new ResponseEntity<>(vote, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

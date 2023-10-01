@@ -64,6 +64,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/updateresult/{result}/{postId}")
+    public ResponseEntity updatePointVote(@PathVariable("result") String result,@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            postService.updateResult(result,postId);
+            return new ResponseEntity<>("result update", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/list")
     public ResponseEntity listPost(){
         try{

@@ -49,6 +49,11 @@ public class PostServiceImpl implements PostService{
     public  List<Post> getAllPostsForMember(String username){
         return postRepository.findAllByPostsForMember(username);
     }
+
+    @Override
+    public void updateResult(String result,String postId) {
+        postRepository.updateResult(result,postId);
+    }
     @Override
     public  List<Post> getListPostsInterest(String username){
         return postRepository.getListPostsInterest(username);

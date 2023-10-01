@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -47,6 +48,38 @@ public class MemberController {
         try{
             String user = memberService.doLoginMember(username,password);
             return new ResponseEntity<>(user, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/updatepoint/{username}/{point}")
+    public ResponseEntity updatePoint(@PathVariable("username") String username,@PathVariable("point") String point) throws IllegalStateException{
+        try{
+            memberService.updatePoint(username,Integer.parseInt(point));
+            return new ResponseEntity<>("point update", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/pointvote/{username}/{point}")
+    public ResponseEntity updatePointVote(@PathVariable("username") String username,@PathVariable("point") String point) throws IllegalStateException{
+        try{
+            memberService.updatePointVote(username,Integer.parseInt(point));
+            return new ResponseEntity<>("point update", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/usernamevotepost/{postId}")
+    public ResponseEntity getUsernameVotePost(@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+          List<String> usernames =  memberService.getUsernameVotePost(postId);
+            return new ResponseEntity<>(usernames, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
