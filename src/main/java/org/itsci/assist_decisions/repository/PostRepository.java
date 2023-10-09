@@ -22,7 +22,7 @@ public interface PostRepository extends JpaRepository<Post,String> {
     @Query(value = "SELECT * FROM post where interestId in(SELECT interestId FROM memberinterest where username = :username)and username !=:username ", nativeQuery = true)
     public List<Post> findAllByPostsForMember(String username);
 
-    @Query(value = "SELECT * FROM post where username != :username and interestId in(SELECT interestId FROM memberinterest where username = :username) order by postPoint Desc;", nativeQuery = true)
+    @Query(value = "SELECT * FROM post where username != :username and interestId in(SELECT interestId FROM memberinterest where username = :username) and postId Not in(SELECT postId FROM view_post where username = :username) order by postPoint Desc;", nativeQuery = true)
     public List<Post> getListPostsInterest(@Param("username") String username);
 
     @Query(value = "SELECT * FROM post where username = :username order by dateStop;", nativeQuery = true)
