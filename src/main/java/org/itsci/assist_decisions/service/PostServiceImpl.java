@@ -117,6 +117,7 @@ public class PostServiceImpl implements PostService{
         String result = "r";
         Integer qtyMax;
         Integer qtyMin;
+        Double avgPoint = 0.0;
         try {
             qtyMax = Integer.parseInt(map.get("qtyMax"));
             qtyMin = Integer.parseInt(map.get("qtyMin"));
@@ -128,7 +129,7 @@ public class PostServiceImpl implements PostService{
         String interestId = map.get("interestId");
         Member member = memberRepository.getReferenceById(username);
         Interest interest = interestRepository.getReferenceById(interestId);
-        Post post = new Post(postId,postImage,title,description,postPoint,dateStart,dateStop,result,qtyMax,qtyMin,member,interest);
+        Post post = new Post(postId,postImage,title,description,postPoint,dateStart,dateStop,result,qtyMax,qtyMin,avgPoint,member,interest);
         return postRepository.save(post);
     }
 
@@ -152,6 +153,7 @@ public class PostServiceImpl implements PostService{
         String result = map.get("result");
         Integer qtyMax;
         Integer qtyMin;
+        Double avgPoint = 0.0;
         try {
             qtyMax = Integer.parseInt(map.get("qtyMax"));
             qtyMin = Integer.parseInt(map.get("qtyMin"));
@@ -163,7 +165,7 @@ public class PostServiceImpl implements PostService{
         String interestId = map.get("interestId");
         Member member = memberRepository.getReferenceById(username);
         Interest interest = interestRepository.getReferenceById(interestId);
-        Post post = new Post(postId,postImage,title,description,postPoint,dateStart,dateStop,result,qtyMax,qtyMin,member,interest);
+        Post post = new Post(postId,postImage,title,description,postPoint,dateStart,dateStop,result,qtyMax,qtyMin,avgPoint,member,interest);
         return postRepository.save(post);
     }
 

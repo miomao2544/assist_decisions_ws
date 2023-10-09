@@ -50,11 +50,13 @@ public class MemberServiceImpl implements MemberService{
         String result = "";
         Member member;
          member  = memberRepository.getMemberByUsername(username);
-         int numberOfDay = historyRepository.getnumberOfDay(username);
-        int daysSinceBan = historyRepository.daysSinceBan(username);
-        if (daysSinceBan >numberOfDay){
-            historyRepository.updateStatus(username,"active");
-        }
+         if(member.getStatus().equals("banned")){
+             int numberOfDay = historyRepository.getnumberOfDay(username);
+             int daysSinceBan = historyRepository.daysSinceBan(username);
+             if (daysSinceBan >numberOfDay){
+                 historyRepository.updateStatus(username,"active");
+             }
+         }
         if(member == null){
             result = "nodata";
         }

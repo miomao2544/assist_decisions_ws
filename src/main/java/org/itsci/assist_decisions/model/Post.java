@@ -48,6 +48,9 @@ public class Post {
     @Column(name="qtyMin",nullable = false,length = 4)
     private int qtyMin;
 
+    @Column(name="avgPoint",nullable = false,length = 4)
+    private Double avgPoint;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "username",nullable = false)
     private Member member;
