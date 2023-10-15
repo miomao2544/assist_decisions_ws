@@ -53,7 +53,9 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public void updateResult(String result,String postId) {
-        postRepository.updateResult(result,postId);
+
+       Double amount =  (postRepository.getListCountMember(postId).doubleValue());
+        postRepository.updateResult(result,postId,amount);
     }
     @Override
     public  List<Post> getListPostsInterest(String username){
@@ -156,7 +158,7 @@ public class PostServiceImpl implements PostService{
             e.printStackTrace();
             return null;
         }
-        String result = map.get("result");
+        String result = "r";
         Integer qtyMax;
         Integer qtyMin;
         Double avgPoint = 0.0;
