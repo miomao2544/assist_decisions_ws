@@ -2,6 +2,7 @@ package org.itsci.assist_decisions.service;
 
 import ch.qos.logback.classic.pattern.DateConverter;
 import lombok.Data;
+import org.itsci.assist_decisions.model.Choice;
 import org.itsci.assist_decisions.model.Interest;
 import org.itsci.assist_decisions.model.Member;
 import org.itsci.assist_decisions.model.Post;
@@ -82,6 +83,11 @@ public class PostServiceImpl implements PostService{
     @Override
     public  Integer getListCountMember(String postId){
         return postRepository.getListCountMember(postId);
+    }
+
+    @Override
+    public  List<Post> getPostByPointVoteMember(String username){
+        return postRepository.getPostByPointVoteMember(username);
     }
 
     @Override

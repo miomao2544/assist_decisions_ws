@@ -14,7 +14,7 @@ import java.util.Map;
 public interface ChoiceService {
     List<Choice> getAllChoices();
     List<Choice> getChoiceById(String choiceId);
-
+    List<Choice> getChoiceByPointVoteMember(String username);
     Choice saveChoice(Map<String, String> map);
     Choice editChoice(Map<String, String> map);
     void deleteChoice(String choiceId);

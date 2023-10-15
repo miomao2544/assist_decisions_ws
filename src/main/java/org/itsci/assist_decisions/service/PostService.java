@@ -21,6 +21,8 @@ public interface PostService {
 
     List<Post> getListPostByMember(String username);
 
+    List<Post> getPostByPointVoteMember(String username);
+
     List<Post> getSearchListPostByAll(String title, String interests, String point, String daterequest);
     Integer getListCountMember(String posId);
 

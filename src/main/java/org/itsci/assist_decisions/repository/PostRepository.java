@@ -38,4 +38,8 @@ public interface PostRepository extends JpaRepository<Post,String> {
     @Modifying
     @Query(value = "UPDATE post SET result = :result WHERE postId = :postId", nativeQuery = true)
     void updateResult(@Param("result") String result ,@Param("postId")String postId);
+
+
+    @Query(value = "SELECT p.* FROM post p JOIN choice c ON p.postId = c.postId JOIN vote v ON c.choiceId = v.choiceId JOIN member m ON v.username = m.username WHERE m.username = :username and result != 'r' ORDER BY v.voteDate", nativeQuery = true)
+    List<Post> getPostByPointVoteMember(String username);
 }

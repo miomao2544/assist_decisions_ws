@@ -83,6 +83,11 @@ public class ChoiceServiceImpl implements ChoiceService{
     }
 
     @Override
+    public  List<Choice> getChoiceByPointVoteMember(String username){
+        return choiceRepository.getChoiceByPointVoteMember(username);
+    }
+
+    @Override
     public void deleteChoice(String choiceId) {
     }
 

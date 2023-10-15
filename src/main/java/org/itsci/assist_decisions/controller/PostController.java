@@ -1,5 +1,6 @@
 package org.itsci.assist_decisions.controller;
 
+import org.itsci.assist_decisions.model.Choice;
 import org.itsci.assist_decisions.model.Post;
 import org.itsci.assist_decisions.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,17 @@ public class PostController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/listpoint/{username}")
+    public ResponseEntity getPostByPointVoteMember(@PathVariable("username") String username) throws IllegalStateException{
+        try{
+            List<Post> posts = postService.getPostByPointVoteMember(username);
+            return new ResponseEntity<>(posts, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
