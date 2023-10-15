@@ -48,4 +48,26 @@ public class ReportController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/comments/{postId}")
+    public ResponseEntity getReportCommentByPost(@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            List<String> reportComments = reportService.getReportCommentByPost(postId);
+            return new ResponseEntity<>(reportComments, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/count/{postId}")
+    public ResponseEntity getReportCountByPost(@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            String count = reportService.getReportCountByPost(postId);
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -28,7 +28,17 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public List<Report> getAllReports() {
-        return reportRepository.findAll();
+        return reportRepository.findAllReport();
+    }
+
+    @Override
+    public List<String> getReportCommentByPost(String postId) {
+        return reportRepository.findReportCommentByPost(postId);
+    }
+
+    @Override
+    public String getReportCountByPost(String postId) {
+        return reportRepository.findReportCountByPost(postId);
     }
 
     @Override
