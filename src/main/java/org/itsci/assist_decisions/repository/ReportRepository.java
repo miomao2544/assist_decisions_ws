@@ -18,6 +18,7 @@ public interface ReportRepository extends JpaRepository<Report,String> {
     @Query(value = "SELECT reportComment FROM report WHERE postId = :postId", nativeQuery = true)
     List<String> findReportCommentByPost(String postId);
 
+    List<Report> findReportByPostPostIdOrderByReportDateDesc(String postId);
     @Query(value = "SELECT COUNT(*) FROM report WHERE postId =  :postId", nativeQuery = true)
     String findReportCountByPost(String postId);
 }

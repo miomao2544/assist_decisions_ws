@@ -38,6 +38,19 @@ public class ReportController {
         }
     }
 
+
+    @PostMapping("/list/{postId}")
+    public ResponseEntity getListReportByPostId(@PathVariable("postId") String postId) throws IllegalStateException{
+        try{
+            List<Report> reports = reportService.getReportByPostId(postId);
+            return new ResponseEntity<>(reports, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @PostMapping("/getReportById/{reportId}")
     public ResponseEntity getReportById(@PathVariable("reportId") String reportId) throws IllegalStateException{
         try{

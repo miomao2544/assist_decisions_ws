@@ -37,6 +37,11 @@ public class ReportServiceImpl implements ReportService{
     }
 
     @Override
+    public List<Report> getReportByPostId(String postId) {
+        return reportRepository.findReportByPostPostIdOrderByReportDateDesc(postId);
+    }
+
+    @Override
     public String getReportCountByPost(String postId) {
         return reportRepository.findReportCountByPost(postId);
     }

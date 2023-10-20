@@ -55,23 +55,29 @@ public class ChoiceServiceImpl implements ChoiceService{
     }
 
     public Choice editChoice(Map<String, String> map) {
+        Boolean status = Boolean.parseBoolean(map.get("status"));
         String choiceId = map.get("choiceId");
-        if(choiceId == ""){
-            String rawChoiceId = choiceRepository.getLatestChoiceId();
+        if(status) {
+            if (choiceId == "") {
 
-            if (rawChoiceId == null) {
-                rawChoiceId = "C000000";
+                String rawChoiceId = choiceRepository.getLatestChoiceId();
+                if (rawChoiceId == null) {
+                    rawChoiceId = "C000000";
+                }
+                String rawChoiceIdWithoutP = rawChoiceId.substring(1);
+                long rawLongChoiceId = Long.parseLong(rawChoiceIdWithoutP);
+                choiceId = generateChoiceId(rawLongChoiceId + 1);
             }
-            String rawChoiceIdWithoutP = rawChoiceId.substring(1);
-            long rawLongChoiceId = Long.parseLong(rawChoiceIdWithoutP);
-            choiceId = generateChoiceId(rawLongChoiceId +1);
+            String choiceName = map.get("choiceName");
+            String choiceImage = map.get("choiceImage");
+            String postId = map.get("postId");
+            Post post = postRepository.getReferenceById(postId);
+            Choice choice = new Choice(choiceId, choiceName, choiceImage, post);
+            return choiceRepository.save(choice);
+        }else{
+            deleteChoice(choiceId);
+            return null;
         }
-        String choiceName = map.get("choiceName");
-        String choiceImage = map.get("choiceImage");
-        String postId = map.get("postId");
-        Post post = postRepository.getReferenceById(postId);
-        Choice choice = new Choice(choiceId,choiceName,choiceImage,post);
-        return choiceRepository.save(choice);
     }
     public String generateChoiceId(long rawId) {
         String result = Long.toString(rawId);
@@ -89,6 +95,9 @@ public class ChoiceServiceImpl implements ChoiceService{
 
     @Override
     public void deleteChoice(String choiceId) {
+        Choice choice = choiceRepository.getReferenceById(choiceId);
+        choice.setPost(null);
+        choiceRepository.delete(choice);
     }
 
     @Override

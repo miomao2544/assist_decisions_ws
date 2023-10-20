@@ -12,6 +12,7 @@ public interface ReportService {
     List<Report> getAllReports();
 
     List<String> getReportCommentByPost(String postId);
+    List<Report> getReportByPostId(String postId);
     String getReportCountByPost(String postId);
     Report getReportById(String reportId);
     Report doRerortPost(Map<String, String> map);
