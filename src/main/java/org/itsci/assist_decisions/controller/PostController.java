@@ -119,6 +119,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/listme/{username}")
+    public ResponseEntity getListPostByMe(@PathVariable("username") String username) {
+        try {
+            List<Post> posts = postService.getAllPostsMe(username);
+            return new ResponseEntity(posts, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/count/{postId}")
     public ResponseEntity getListCountMember(@PathVariable("postId") String postId) {
         try {

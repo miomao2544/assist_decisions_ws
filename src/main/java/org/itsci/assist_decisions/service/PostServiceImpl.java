@@ -39,7 +39,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public List<Post> getAllPosts() {
-        return postRepository.findAll();
+        return postRepository.findAllOrderByDateStart();
     }
     @Override
     public  List<Post> getAllPostsDateStopAfter(){
@@ -49,6 +49,11 @@ public class PostServiceImpl implements PostService{
     @Override
     public  List<Post> getAllPostsForMember(String username){
         return postRepository.findAllByPostsForMember(username);
+    }
+
+    @Override
+    public  List<Post> getAllPostsMe(String username){
+        return postRepository.findAllByMemberUsernameOrderByPostIdDesc(username);
     }
 
     @Override

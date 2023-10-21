@@ -15,6 +15,8 @@ public interface PostService {
 
     List<Post> getAllPostsDateStopAfter();
     List<Post> getAllPostsForMember(String username);
+
+    List<Post> getAllPostsMe(String username);
     Post getPostById(String postId);
 
     List<Post> getListPostsInterest(String username);

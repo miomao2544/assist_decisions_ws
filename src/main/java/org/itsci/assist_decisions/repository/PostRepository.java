@@ -19,14 +19,18 @@ public interface PostRepository extends JpaRepository<Post,String> {
 
     public List<Post> findAllByDateStopAfter(Date date);
 
+    @Query(value = "SELECT * FROM post order by postId desc ", nativeQuery = true)
+    public List<Post> findAllOrderByDateStart();
+
     @Query(value = "SELECT * FROM post where interestId in(SELECT interestId FROM memberinterest where username = :username)and username !=:username ", nativeQuery = true)
     public List<Post> findAllByPostsForMember(String username);
 
+    public List<Post> findAllByMemberUsernameOrderByPostIdDesc(String username);
     @Query(value = "SELECT * FROM post where username != :username and interestId in(SELECT interestId FROM memberinterest where username = :username) and postId Not in(SELECT postId FROM view_post where username = :username) order by postPoint Desc;", nativeQuery = true)
     public List<Post> getListPostsInterest(@Param("username") String username);
 
-    @Query(value = "SELECT * FROM post where username = :username order by dateStop;", nativeQuery = true)
-    public List<Post> getListPostByMember(@Param("username") String username);
+    @Query(value = "SELECT * FROM post where interestId in(SELECT interestId FROM memberinterest where username = :username) order by postId desc", nativeQuery = true)
+    public List<Post> getListPostByMember(String username);
 
     @Query(value = "SELECT count(c.postId) FROM choice c right join vote v on c.choiceId = v.choiceId where postId = :postId", nativeQuery = true)
     Integer getListCountMember(@Param("postId") String postId);
