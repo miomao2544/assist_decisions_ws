@@ -1,8 +1,5 @@
 package org.itsci.assist_decisions.service;
 
-import ch.qos.logback.classic.pattern.DateConverter;
-import lombok.Data;
-import org.itsci.assist_decisions.model.Choice;
 import org.itsci.assist_decisions.model.Interest;
 import org.itsci.assist_decisions.model.Member;
 import org.itsci.assist_decisions.model.Post;
@@ -192,7 +189,6 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public String uploadPostImg(MultipartFile file) throws IOException {
-        //System.out.println("FILE NAME IS : " + file.getOriginalFilename());
         String newFileName = System.currentTimeMillis() + ".png";
         file.transferTo(new File(mainPath + newFileName));
         return newFileName;
