@@ -27,6 +27,17 @@ public class HistoryBanController {
         }
     }
 
+    @PostMapping("/get/{username}")
+    public ResponseEntity getHistory(@PathVariable("username") String username){
+        try{
+            History_Ban historyBan = historyBanService.getHistoryBanById(username);
+            return new ResponseEntity<>(historyBan, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/status/{username}/{status}")
     public ResponseEntity updateStatus(@PathVariable("username") String username,@PathVariable("status") String status){
         try{

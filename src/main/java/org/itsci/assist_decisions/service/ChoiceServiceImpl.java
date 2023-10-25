@@ -54,7 +54,7 @@ public class ChoiceServiceImpl implements ChoiceService{
         return choiceRepository.save(choice);
     }
 
-    public Choice editChoice(Map<String, String> map) {
+    public String editChoice(Map<String, String> map) {
         Boolean status = Boolean.parseBoolean(map.get("status"));
         String choiceId = map.get("choiceId");
         if(status) {
@@ -73,10 +73,11 @@ public class ChoiceServiceImpl implements ChoiceService{
             String postId = map.get("postId");
             Post post = postRepository.getReferenceById(postId);
             Choice choice = new Choice(choiceId, choiceName, choiceImage, post);
-            return choiceRepository.save(choice);
+            choiceRepository.save(choice);
+            return "true";
         }else{
-            deleteChoice(choiceId);
-            return null;
+           String result = deleteChoice(choiceId);
+            return result;
         }
     }
     public String generateChoiceId(long rawId) {
@@ -94,10 +95,15 @@ public class ChoiceServiceImpl implements ChoiceService{
     }
 
     @Override
-    public void deleteChoice(String choiceId) {
-        Choice choice = choiceRepository.getReferenceById(choiceId);
-        choice.setPost(null);
-        choiceRepository.delete(choice);
+    public String deleteChoice(String choiceId) {
+        try {
+            Choice choice = choiceRepository.getReferenceById(choiceId);
+            choice.setPost(null);
+            choiceRepository.delete(choice);
+            return "true";
+        }catch (Exception e){
+            return "flase";
+        }
     }
 
     @Override

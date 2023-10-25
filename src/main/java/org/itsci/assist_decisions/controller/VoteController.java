@@ -45,4 +45,16 @@ public class VoteController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PostMapping("/getvote/{postId}/{username}")
+    public ResponseEntity getChoiceNameById(@PathVariable("postId") String postId,@PathVariable("username") String username) throws IllegalStateException{
+        try{
+            String choiceVote= voteService.getChoiceName(postId,username);
+            return new ResponseEntity<>(choiceVote, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

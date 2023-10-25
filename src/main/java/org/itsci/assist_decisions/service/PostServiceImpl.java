@@ -56,7 +56,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public void updateResult(String result,String postId) {
 
-       Double amount =  (postRepository.getListCountMember(postId).doubleValue());
+       int amount =  (postRepository.getListCountMember(postId));
         postRepository.updateResult(result,postId,amount);
     }
     @Override
@@ -113,7 +113,7 @@ public class PostServiceImpl implements PostService{
         String postImage = map.get("postImage");
         String title = map.get("title");
         String description = map.get("description");
-        Double postPoint = Double.parseDouble(map.get("postPoint"));
+        Integer postPoint = Integer.parseInt(map.get("postPoint"));
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateStart;
         Date dateStop;
@@ -127,7 +127,7 @@ public class PostServiceImpl implements PostService{
         String result = "r";
         Integer qtyMax;
         Integer qtyMin;
-        Double avgPoint = 0.0;
+        Integer avgPoint = 0;
         try {
             qtyMax = Integer.parseInt(map.get("qtyMax"));
             qtyMin = Integer.parseInt(map.get("qtyMin"));
@@ -149,7 +149,7 @@ public class PostServiceImpl implements PostService{
         String postImage = map.get("postImage");
         String title = map.get("title");
         String description = map.get("description");
-        Double postPoint = Double.parseDouble(map.get("postPoint"));
+        Integer postPoint = Integer.parseInt(map.get("postPoint"));
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateStart;
         Date dateStop;
@@ -163,7 +163,7 @@ public class PostServiceImpl implements PostService{
         String result = "r";
         Integer qtyMax;
         Integer qtyMin;
-        Double avgPoint = 0.0;
+        Integer avgPoint = 0;
         try {
             qtyMax = Integer.parseInt(map.get("qtyMax"));
             qtyMin = Integer.parseInt(map.get("qtyMin"));

@@ -26,15 +26,15 @@ public class ChoiceController {
             Choice choice = choiceService.saveChoice(map);
             return new ResponseEntity<>(choice, HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @PostMapping("/update")
     public ResponseEntity editChoice(@RequestBody Map<String,String> map){
         try{
-            Choice choice = choiceService.editChoice(map);
-            return new ResponseEntity<>(choice, HttpStatus.OK);
+            String result = choiceService.editChoice(map);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

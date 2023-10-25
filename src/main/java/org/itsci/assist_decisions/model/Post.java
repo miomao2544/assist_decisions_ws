@@ -31,7 +31,7 @@ public class Post {
     private String description;
 
     @Column(name="postPoint",nullable = false,length = 4)
-    private Double postPoint;
+    private int postPoint;
 
     @Column(name="dateStart",nullable = false)
     private Date dateStart;
@@ -49,7 +49,7 @@ public class Post {
     private int qtyMin;
 
     @Column(name="avgPoint",nullable = false,length = 4)
-    private Double avgPoint;
+    private int avgPoint;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "username",nullable = false)

@@ -26,8 +26,8 @@ public class HistoryBanServiceImpl implements HistoryBanService{
     }
 
     @Override
-    public History_Ban getHistoryBanById(String HistoryBanId) {
-        return null;
+    public History_Ban getHistoryBanById(String username) {
+        return historyBanRepository.getHistoryBan(username);
     }
 
     @Override

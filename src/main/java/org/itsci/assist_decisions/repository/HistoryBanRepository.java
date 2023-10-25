@@ -15,6 +15,8 @@ public interface HistoryBanRepository extends JpaRepository<History_Ban,String> 
     @Query(value = "SELECT numberOfDay FROM ban_type WHERE banTypeId = (SELECT banTypeId FROM history_ban WHERE username = :username ORDER BY banDate DESC LIMIT 1);", nativeQuery = true)
     int getnumberOfDay(String username);
 
+    @Query(value = "SELECT * FROM history_ban where username = :username ORDER BY historyId DESC LIMIT 1", nativeQuery = true)
+    History_Ban getHistoryBan(String username);
     @Query(value = "SELECT DATEDIFF(NOW(), banDate) AS daysSinceBan FROM history_ban WHERE username = :username ORDER BY banDate DESC LIMIT 1", nativeQuery = true)
     int daysSinceBan(String username);
     @Transactional

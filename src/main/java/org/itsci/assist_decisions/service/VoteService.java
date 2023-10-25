@@ -15,6 +15,9 @@ public interface VoteService {
 
     int getVoteByChoice(String choiceId);
     int getIFVoteChoice(String username,String choiceId);
+
+
+    String getChoiceName(String username,String postId);
     void updateVote(Vote vote);
     void deleteVote(String voteId);
 }

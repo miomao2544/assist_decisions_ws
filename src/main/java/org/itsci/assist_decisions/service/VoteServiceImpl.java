@@ -33,7 +33,10 @@ public class VoteServiceImpl implements VoteService{
         return voteRepository.findVoteForChoice(choiceId);
     }
 
-    public int getIFVoteChoice(String username,String postId) {
+    public String getChoiceName(String username,String postId) {
+        return voteRepository.findChoiceName(username,postId);
+    }
+    public int getIFVoteChoice(String postId,String username) {
         return voteRepository.findIFVoteChoice(username,postId);
     }
     @Override

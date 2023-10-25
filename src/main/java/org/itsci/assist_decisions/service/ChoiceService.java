@@ -16,8 +16,8 @@ public interface ChoiceService {
     List<Choice> getChoiceById(String choiceId);
     List<Choice> getChoiceByPointVoteMember(String username);
     Choice saveChoice(Map<String, String> map);
-    Choice editChoice(Map<String, String> map);
-    void deleteChoice(String choiceId);
+    String editChoice(Map<String, String> map);
+    String deleteChoice(String choiceId);
     String uploadChoiceImg (MultipartFile file) throws IOException;
     Path downloadChoiceImg (String filePath) ;
 }
