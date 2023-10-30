@@ -120,7 +120,16 @@ public class MemberServiceImpl implements MemberService{
         String lastname = map.get("lastname");
         String nickname = map.get("nickname");
         String password = map.get("password");
-        String hashedPassword = hashToMD5(password);
+        String hashedPassword;
+        String passUsername = memberRepository.findById(username).get().getPassword();
+        System.out.println("passUsername is : "+passUsername);
+        System.out.println("hashedPassword is : "+password);
+        if(password.equals(passUsername)) {
+            hashedPassword = password;
+
+        }else{
+            hashedPassword = hashToMD5(password);
+        }
         Integer point = Integer.parseInt(map.get("point"));
         String status = map.get("status");
         String tel = map.get("tel");

@@ -40,7 +40,7 @@ public interface PostRepository extends JpaRepository<Post,String> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE post SET result = :result , avgPoint = postPoint/:amount WHERE postId = :postId", nativeQuery = true)
+    @Query(value = "UPDATE post SET result = :result , avgPoint = CAST(postPoint/:amount AS INTEGER) WHERE postId = :postId", nativeQuery = true)
     void updateResult(@Param("result") String result ,@Param("postId")String postId,int amount);
 
 
